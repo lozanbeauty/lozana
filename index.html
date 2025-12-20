@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lozana Beauty Studio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #5d3a7a;        /* Deep plum */
+      --primary-light: #8a6ba8;
+      --primary-dark: #3d2552;
+      --accent: #c49bbd;         /* Soft mauve */
+      --bg: #faf8f6;             /* Warm ivory */
+      --card-bg: #ffffff;
+      --text: #2c2c2c;
+      --text-muted: #6b6b6b;
+      --border: #eae6e2;
+      --shadow: 0 6px 24px rgba(93, 58, 122, 0.08);
+      --radius: 20px;
+      --transition: all 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      padding-bottom: 60px;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 60px 0 35px;
+    }
+
+    header h1 {
+      font-size: 3.4rem;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: var(--primary-dark);
+      font-weight: 500;
+      margin-top: 10px;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 36px 0;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      padding: 11px 28px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .tab-btn:hover,
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    /* Page */
+    .page {
+      display: none;
+      opacity: 0;
+      animation: fadeIn 0.5s forwards;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 40px;
+      box-shadow: var(--shadow);
+      margin-bottom: 36px;
+    }
+
+    .card h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      color: var(--primary-dark);
+      margin-bottom: 32px;
+    }
+
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 26px 14px;
+      background: #f9f4f7;
+      border-radius: var(--radius);
+      color: var(--primary-dark);
+      font-weight: 600;
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      background: #f2e9f0;
+    }
+
+    .service-card i {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+      color: var(--primary);
+    }
+
+    /* ——— PROFESSIONAL PRICING TABLE ——— */
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    .pricing-table th {
+      text-align: left;
+      padding: 14px 0;
+      color: var(--primary);
+      font-weight: 700;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .pricing-table td {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      font-weight: 500;
+    }
+
+    .pricing-table td:last-child {
+      text-align: right;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .pricing-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Tiered Pricing Groups */
+    .tier-group {
+      background: #faf5f9;
+      border-radius: var(--radius);
+      padding: 24px;
+      margin: 32px 0;
+      border-left: 4px solid var(--accent);
+    }
+
+    .tier-group h3 {
+      color: var(--primary-dark);
+      margin-bottom: 18px;
+      font-size: 1.4rem;
+    }
+
+    .tier-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .tier-table td {
+      padding: 12px 0;
+      font-weight: 500;
+    }
+
+    .tier-table td:last-child {
+      text-align: right;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* Offer */
+    .offer-card {
+      background: linear-gradient(135deg, #f5ecf2 0%, #e9e0ea 100%);
+      border-radius: var(--radius);
+      padding: 50px 36px;
+      text-align: center;
+      position: relative;
+    }
+
+    .offer-card h2 {
+      color: var(--primary-dark);
+      margin-bottom: 20px;
+      font-size: 2.1rem;
+    }
+
+    .offer-badge {
+      background: var(--primary);
+      color: white;
+      display: inline-block;
+      padding: 7px 26px;
+      border-radius: 50px;
+      font-weight: 700;
+      margin: 18px 0;
+      font-size: 1.1rem;
+    }
+
+    .offer-services {
+      font-size: 1.55rem;
+      margin: 24px 0;
+      color: var(--primary-dark);
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .offer-total {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 22px 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .whatsapp-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: 50px;
+      margin-top: 20px;
+      transition: var(--transition);
+    }
+
+    .whatsapp-cta a:hover {
+      background: var(--primary-dark);
+      transform: scale(1.04);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Floating WhatsApp */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 68px;
+      height: 68px;
+      background: #25D366;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.85rem;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+      text-decoration: none;
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.12);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header h1 { font-size: 2.5rem; }
+      .card { padding: 30px 20px; }
+      .offer-card { padding: 40px 20px; }
+      .offer-total { font-size: 2.2rem; }
+      .pricing-table td,
+      .tier-table td {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Lozana</h1>
+      <p>Elegant Beauty Studio</p>
+    </header>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-page="mainmenu">Services</button>
+      <button class="tab-btn" data-page="prices">Pricing</button>
+      <button class="tab-btn" data-page="offer">Special Offer</button>
+    </div>
+
+    <!-- SERVICES -->
+    <div id="mainmenu" class="page active">
+      <div class="card">
+        <h2>Our Signature Services</h2>
+        <div class="services-grid">
+          <div class="service-card"><i class="fas fa-cut"></i> Haircut</div>
+          <div class="service-card"><i class="fas fa-eyebrow"></i> Eyebrows Shaping</div>
+          <div class="service-card"><i class="fas fa-paint-brush"></i> Hair Tint</div>
+          <div class="service-card"><i class="fas fa-spa"></i> Keratin</div>
+          <div class="service-card"><i class="fas fa-leaf"></i> Henna Brows</div>
+          <div class="service-card"><i class="fas fa-mask"></i> Facial Mask</div>
+          <div class="service-card"><i class="fas fa-clipboard-list"></i> Full Makeup</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRICING -->
+    <div id="prices" class="page">
+      <div class="card">
+        <h2>Transparent & Detailed Pricing</h2>
+
+        <table class="pricing-table">
+          <tr><td>Eyebrows Shaping</td><td>$4</td></tr>
+          <tr><td>Haircut</td><td>$5</td></tr>
+          <tr><td>Henna Brows</td><td>$3</td></tr>
+          <tr><td>Facial Mask</td><td>$10</td></tr>
+          <tr><td>Full Makeup</td><td>$40</td></tr>
+        </table>
+
+        <div class="tier-group">
+          <h3>Hair Tint — by Hair Length</h3>
+          <table class="tier-table">
+            <tr><td>Short Hair</td><td>$15</td></tr>
+            <tr><td>Medium Hair</td><td>$30</td></tr>
+            <tr><td>Long Hair</td><td>$40</td></tr>
+          </table>
+        </div>
+
+        <div class="tier-group">
+          <h3>Keratin Treatment — by Hair Length</h3>
+          <table class="tier-table">
+            <tr><td>Short Hair</td><td>$30</td></tr>
+            <tr><td>Long Hair</td><td>$50</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- OFFER -->
+    <div id="offer" class="page">
+      <div class="offer-card">
+        <h2>✨ New Year Special Offer ✨</h2>
+        <div class="offer-badge">Limited Time</div>
+        <div class="offer-services">Facial Mask<br />+ Eyebrows Shaping<br />+ Haircut</div>
+        <div class="offer-total">$10</div>
+        <p>Complete beauty refresh at an exceptional value.</p>
+
+        <div class="whatsapp-cta">
+          <a href="https://wa.me/96171698918" target="_blank">
+            <i class="fab fa-whatsapp"></i> Book Your Appointment
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      &copy; 2025 Lozana Beauty Studio. All rights reserved.
+    </footer>
+  </div>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/96171698918" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.page).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
